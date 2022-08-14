@@ -4,3 +4,4 @@
 /dist
 /tests/__pycache__
 /ycache/__pycache__
+.temp
