@@ -2,3 +2,5 @@
 /.vscode
 /output
 /dist
+/tests/__pycache__
+/ycache/__pycache__
