@@ -54,9 +54,14 @@ def pickled_lru_cache(maxsize=128, typed=False, ttl=10):
 
 def disk_cache(cache_dir='.temp', ttl=60*60*24):
     def _decorator(func):
+        def md5(s) -> str:
+            m = hashlib.md5()
+            m.update(str(s).encode('utf-8'))
+            return m.hexdigest()
+
         def _make_key(namespace, *args, **kwargs):
-            key = {'name': namespace, 'args': args, 'kwargs': kwargs}
-            return key
+            key = f'{namespace}-{str(args)}-{str(kwargs)}'
+            return md5(key)
 
         @wraps(func)
         def _wrapper(*args, **kwargs):

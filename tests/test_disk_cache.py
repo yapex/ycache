@@ -19,3 +19,8 @@ class TestDiskCache:
         expected = '{"args": [1, 3, [2, 3], {"2": 3}], "kwargs": {"a": 2, "b": 3, "c": [2, 3], "d": {"2": 3}}}'
 
         assert result == expected
+
+        cached_result = function_that_takes_long(
+            1, 3, [2, 3], {2: 3}, a=2, b=3, c=[2, 3], d={2: 3})
+
+        assert cached_result == expected
