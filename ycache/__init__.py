@@ -67,13 +67,14 @@ def disk_cache(cache_dir='.temp', ttl=60*60*24):
         def _wrapper(*args, **kwargs):
             key = _make_key(func.__name__, args, kwargs)
             with Cache(cache_dir) as cache:
-                if not cache.get(key):
+                cached_result = cache.get(key)
+                if cached_result is None:
                     logger.debug(f'not hitted, recache key:[{key}]')
                     result = func(*args, **kwargs)
                     cache.set(key, result, expire=ttl)
                     return result
                 else:
                     logger.debug(f'[{key}] hitted in cache')
-                    return cache.get(key)
+                    return cached_result
         return _wrapper
     return _decorator
