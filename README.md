@@ -12,6 +12,31 @@ YCache 是一个高性能的 Python 缓存工具库，提供了内存缓存和�
 - 🧵 线程安全：磁盘缓存支持多线程访问
 
 ## 安装
-
 ```bash
 pip install ycache
+```
+## 快速开始
+### 内存缓存
+
+```python
+from ycache import orjson_lru_cache
+
+@orjson_lru_cache(maxsize=128, ttl=60)
+def expensive_operation(x: int) -> int:
+    # 一些耗时的操作
+    return x * 2
+
+result = expensive_operation(42)  # 执行函数
+result = expensive_operation(42)  # 使用缓存
+```
+### 磁盘缓存
+```python
+from ycache import disk_cache
+
+@disk_cache(cache_dir='.cache', ttl=3600)
+def load_data(filename: str) -> dict:
+    # 一些耗时的文件操作
+    return {'data': 'content'}
+
+data = load_data('example.txt')
+```
