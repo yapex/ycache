@@ -1,6 +1,6 @@
 [project]
 name = "ycache"
-version = "0.2.0"
+version = "0.3.0"
 description = "a simple cache tools"
 authors = [
     {name = "yapex",email = "yapex.yin@gmail.com"}
